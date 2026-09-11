@@ -2,6 +2,8 @@ public struct DefaultEmptyDictionaryStrategy<Key: Decodable & Hashable, Value: D
     public static var defaultValue: [Key: Value] { return [:] }
 }
 
+extension DefaultEmptyDictionaryStrategy: Sendable where Key: Sendable, Value: Sendable { }
+
 /// Decodes Dictionaries returning an empty dictionary instead of nil if applicable
 ///
 /// `@DefaultEmptyDictionary` decodes Dictionaries and returns an empty dictionary instead of nil if the Decoder is unable

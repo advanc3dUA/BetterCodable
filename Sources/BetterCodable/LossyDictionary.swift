@@ -29,12 +29,12 @@ extension LossyDictionary: Decodable where Key: Decodable, Value: Decodable {
     }
 
     private struct AnyDecodableValue: Decodable {}
-    private struct LossyDecodableValue<Value: Decodable>: Decodable {
-        let value: Value
+    private struct LossyDecodableValue<Element: Decodable>: Decodable {
+        let value: Element
 
         public init(from decoder: Decoder) throws {
             let container = try decoder.singleValueContainer()
-            value = try container.decode(Value.self)
+            value = try container.decode(Element.self)
         }
     }
 
@@ -106,3 +106,4 @@ extension LossyDictionary: Encodable where Key: Encodable, Value: Encodable {
 }
 
 extension LossyDictionary: Equatable where Value: Equatable { }
+extension LossyDictionary: Sendable where Key: Sendable, Value: Sendable { }

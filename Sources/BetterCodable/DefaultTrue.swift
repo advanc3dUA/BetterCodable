@@ -1,4 +1,4 @@
-public struct DefaultTrueStrategy: BoolCodableStrategy {
+public struct DefaultTrueStrategy: BoolCodableStrategy, Sendable {
     public static var defaultValue: Bool { return true }
 }
 

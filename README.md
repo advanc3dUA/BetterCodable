@@ -2,6 +2,23 @@
 
 Level up your `Codable` structs through property wrappers. The goal of these property wrappers is to avoid implementing a custom `init(from decoder: Decoder) throws` and suffer through boilerplate.
 
+## Swift Concurrency
+
+The property wrappers conditionally conform to `Sendable`: a wrapper is `Sendable` when its value and strategy are `Sendable`. This lets a `Codable & Sendable` model use BetterCodable without `@unchecked Sendable`.
+
+```swift
+struct RefreshDaily: DefaultCodableStrategy, Sendable {
+    static var defaultValue = 24
+}
+
+struct Cache: Codable, Sendable {
+    @DefaultCodable<RefreshDaily> var refreshInterval: Int
+    @LossyArray var identifiers: [String]
+}
+```
+
+Custom strategies used by a `Sendable` model must also declare `Sendable`. `LosslessStringCodable` values must be `Sendable`, because `LosslessValueCodable` preserves the original decoded type for re-encoding.
+
 ## @LossyArray
 
 `@LossyArray` decodes Arrays and filters invalid values if the Decoder is unable to decode the value. This is useful when the Array contains non-optional types and your API serves elements that are either null or fail to decode within the container.

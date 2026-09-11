@@ -16,3 +16,5 @@ public struct Base64Strategy<DataType: MutableDataProtocol>: DataValueCodableStr
         Data(data).base64EncodedString()
     }
 }
+
+extension Base64Strategy: Sendable where DataType: Sendable {}

@@ -37,3 +37,4 @@ extension DataValue: Encodable {
 
 extension DataValue: Equatable where Coder.DataType: Equatable {}
 extension DataValue: Hashable where Coder.DataType: Hashable {}
+extension DataValue: Sendable where Coder: Sendable, Coder.DataType: Sendable {}

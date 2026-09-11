@@ -40,3 +40,4 @@ extension LossyArray: Encodable where T: Encodable {
 
 extension LossyArray: Equatable where T: Equatable { }
 extension LossyArray: Hashable where T: Hashable { }
+extension LossyArray: Sendable where T: Sendable { }

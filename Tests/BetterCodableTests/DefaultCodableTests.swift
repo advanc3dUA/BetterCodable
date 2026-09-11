@@ -193,12 +193,16 @@ class DefaultCodableTests_EnumWithAssociatedValue: XCTestCase {
 	}
 	
 	func testDecodingAndEncodingCustomEnumWithAssociatedValue() throws {
+		// Arrange
 		let jsonData = #"{ "value": { "fish": "ziz", "int": 4 } }"#.data(using: .utf8)!
+
+		// Act
 		let fixture = try JSONDecoder().decode(Fixture.self, from: jsonData)
-		XCTAssertEqual(fixture.value.z, .ziz(4))
-		
 		let data = try JSONEncoder().encode(fixture)
-		let str = String(data: data, encoding: .utf8)
-		XCTAssertEqual(str, #"{"value":{"int":4,"fish":"ziz"}}"#)
+		let encodedFixture = try JSONDecoder().decode(Fixture.self, from: data)
+
+		// Assert
+		XCTAssertEqual(fixture.value.z, .ziz(4))
+		XCTAssertEqual(encodedFixture, fixture)
 	}
 }

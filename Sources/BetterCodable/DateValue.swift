@@ -48,3 +48,5 @@ extension DateValue: Hashable {
         hasher.combine(wrappedValue)
     }
 }
+
+extension DateValue: Sendable where Formatter: Sendable { }

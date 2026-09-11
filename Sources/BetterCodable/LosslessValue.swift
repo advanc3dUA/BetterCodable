@@ -1,6 +1,6 @@
 import Foundation
 
-public typealias LosslessStringCodable = LosslessStringConvertible & Codable
+public typealias LosslessStringCodable = LosslessStringConvertible & Codable & Sendable
 
 /// Provides an ordered list of types for decoding the lossless value, prioritizing the first type that successfully decodes as the inferred type.
 ///
@@ -68,6 +68,8 @@ extension LosslessValueCodable: Hashable where Strategy.Value: Hashable {
     }
 }
 
+extension LosslessValueCodable: Sendable where Strategy: Sendable { }
+
 public struct LosslessDefaultStrategy<Value: LosslessStringCodable>: LosslessDecodingStrategy {
     public static var losslessDecodableTypes: [(Decoder) -> LosslessStringCodable?] {
         @inline(__always)
@@ -91,6 +93,8 @@ public struct LosslessDefaultStrategy<Value: LosslessStringCodable>: LosslessDec
         ]
     }
 }
+
+extension LosslessDefaultStrategy: Sendable { }
 
 public struct LosslessBooleanStrategy<Value: LosslessStringCodable>: LosslessDecodingStrategy {
     public static var losslessDecodableTypes: [(Decoder) -> LosslessStringCodable?] {
@@ -121,6 +125,8 @@ public struct LosslessBooleanStrategy<Value: LosslessStringCodable>: LosslessDec
         ]
     }
 }
+
+extension LosslessBooleanStrategy: Sendable { }
 
 /// Decodes Codable values into their respective preferred types.
 ///

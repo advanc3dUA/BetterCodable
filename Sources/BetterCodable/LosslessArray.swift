@@ -42,3 +42,4 @@ extension LosslessArray: Encodable where T: Encodable {
 
 extension LosslessArray: Equatable where T: Equatable {}
 extension LosslessArray: Hashable where T: Hashable {}
+extension LosslessArray: Sendable where T: Sendable {}

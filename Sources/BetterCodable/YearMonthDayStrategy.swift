@@ -7,7 +7,7 @@ import Foundation
 ///
 /// For example, decoding json data with a `String` representation  of `"2001-01-01"` produces a valid `Date` representing
 /// January 1st, 2001.
-public struct YearMonthDayStrategy: DateValueCodableStrategy {
+public struct YearMonthDayStrategy: DateValueCodableStrategy, Sendable {
     private static let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)

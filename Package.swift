@@ -1,4 +1,4 @@
-// swift-tools-version:5.2
+// swift-tools-version:6.3
 
 import PackageDescription
 
@@ -24,7 +24,7 @@ let package = Package(
             name: "BetterCodableTests",
             dependencies: ["BetterCodable"]),
     ],
-    swiftLanguageVersions: [
-        .version("5")
+    swiftLanguageModes: [
+        .v6
     ]
 )
